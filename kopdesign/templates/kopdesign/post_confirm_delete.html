@@ -1,0 +1,20 @@
+{% extends 'kopdesign/base.html' %}
+{% block content %}
+<div class="container" style="padding:50px">
+    <form method="POST">
+        {% csrf_token %}
+        <h1>Are you sure you want to delete the post?</h1>
+        <hr>
+            <p  class="text-muted">Post by @{{object.username}} on {{object.datetime}}</p>
+        <article>
+            {{object.content}}
+        </article>
+        <div style="margin-top:10px">
+       <a href="{% url 'post-delete' object.id %}"><button class="btn btn-sm btn-outline-danger" type="submit">Confirm</button></a>
+        <a href="{% url 'post-detail' object.id%}"><button class="btn btn-sm btn-outline-info" type="button">Go Back</button></a>
+        <a href="/post/{{object.id}}/update/"><button class="btn btn-sm btn-outline-dark" type="button">Update</button></a>
+        </div>
+    </form>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock content %}

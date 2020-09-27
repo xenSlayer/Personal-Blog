@@ -1,0 +1,80 @@
+{% extends 'kopdesign/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+<style>
+    .card:hover{
+    transform: scale(1.05);
+    }
+    .pupdt:hover{
+    transform: scale(1.1);
+    }
+    #post_
+    {
+  white-space: nowrap;
+  height: 40px;
+  overflow: hidden;
+  text-align: justify;
+  text-overflow: "----";
+    }
+</style>
+<div style="background-color: rgb(26, 26, 26);">
+    <div class="container" style="padding :60px;color: white; background-image: url('https://images.pexels.com/photos/1624275/pexels-photo-1624275.jpeg');">
+    <div class="media">
+  <img src="{{ user.oser.image.url }}" class="align-self-start mr-3 rounded-circle account-img" alt="{{user.first_name}}'s Profile Photo" width="20%" height="20%" style="border-style: dashed;pointer-events: none; ">
+
+        <div class="media-body  mt-3">
+    <h1 class="mt-0">{{user.first_name}} {{user.last_name}}</h1>
+      <p style="font-size: 16px">@{{user.username}}<br> {{user.email}} <br>Account Status:
+          <br><a href="/following" style="color:white; text-decoration:none">{{following_people}} Following</a>
+      </p>
+
+      </div>
+        <div class="row">
+        <article class="pupdt"><a href="/update"><button class="btn btn-dark btn-sm mr-5">Update Profile</button></a></article>
+
+
+    </div>
+        </div>
+</div>
+
+<div class="container" style="background-color: white; padding: 50px;">
+    <div class="container">
+        {% if user.is_authenticated %}
+      <p style="float:right">  <a href="/create" style="text-decoration:none; color:grey"><button class="btn btn-sm btn-warning">Create Post</button>  </a></p>
+        {% endif %}
+    <p>Explore {{user.first_name}}'s gallery</p>
+<hr>
+<!--        ; -->
+
+
+{% if post %}
+        <div class="container">
+<div class="row">
+{% for posts in post %}
+    <a href='/post/{{posts.id}}/'>
+    <div class="column ml-5">
+    <div class="card mt-4 mb-4 mr-5 animated zoomIn" style="width:25rem">
+         <img class="card-img-top" src="{{posts.Image.url}}" alt="Card image cap" width=auto height="50%" >
+    </div>
+    </div>
+    </a>
+{% endfor %}
+    </div>
+
+{% else %}
+</div>
+</div>
+        <div class="container" style="text-align: center"><p> No posts made yet </p></div><br><br><br>
+
+{% endif %}
+</div>
+</div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+{% endblock content %}
+
+</div>
+

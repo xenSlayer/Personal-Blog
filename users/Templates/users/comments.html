@@ -1,0 +1,85 @@
+{% extends 'kopdesign/base.html'%}
+{% load static %}
+{% block content %}
+<script>
+function load_comment()
+        {
+         document.getElementById("content").innerHTML='<object type="text/html" data="kopdesign/comment_create.html" ></object>';
+         }
+</script>
+<div class="container" style="padding-top:60px;">
+    <p>
+        <img src="{{post.Image.url}}" width="auto" height="65%" style="pointer-events: none;">
+    </p>
+      <p class="text-muted">
+        Posted on {{ post.datetime | date:"M d o" }} by @{{post.username}}
+    </p>
+    <p class="text-muted">Tags: {{post.tags}}</p>
+    <hr>
+    <a href="/accounts/profile/{{post.username}}/"><button class="btn btn-info btn-sm">@{{post.username}}</button></a>
+    {% if user.is_authenticated %}
+    {% if is_liked %}
+    <a href="/post/{{post.id}}/like-dislike"><button class="btn btn-sm btn-primary">Unlike</button></a>
+    {% else %}
+    <a href="/post/{{post.id}}/like-dislike"><button class="btn btn-sm btn-primary">Like</button></a>
+    {% endif %}
+    <a href="/post/{{post.id}}/comments/create/"><button class="btn btn-warning btn-sm" onclick="load_comment()">Comment</button></a>
+
+    <a href="{{post.Image.url}}" download="{{post.Image.url}}"><button class="btn btn-dark btn-sm"><i class="fa fa-download"></i> Download</button></a>
+{% if can_edit %}
+    <a href="/post/{{post.id}}/edit/"><button class="btn btn-danger btn-sm">Update/Delete</button></a>
+{% endif %}
+
+    {% endif %}
+<br><br>
+<img src="https://img.icons8.com/pastel-glyph/2x/facebook-like.png" width=auto height="4%" style="pointer-events: none";>
+    {% if is_liked %}
+    <p>You and {{total_likes_you}} other person liked this post</p>
+    {% else %}
+    <p>{{total_likes}} person liked this post</p>
+    {% endif %}
+
+    <p style="text-align: justify;">
+        {{ object.content }}
+    </p>
+</div>
+    {% if comm %}
+<div class="container">
+<h2>COMMENTS</h2>
+    {% for commentz in comm %}
+
+    <div class="card" style="padding:10px;">
+        <div class="media ml-3 mt-2">
+        <img src="{{ commentz.username.oser.image.url }}" class="align-self-start mr-3 rounded-circle account-img" alt="{{commentz.username}}" width="8%" height="13%" style="pointer-events: none; float:left;">
+<div class="media-body">
+
+    <p class="text-muted" style="font-size:14px">Posted on {{commentz.datetime}} by @<a href="/accounts/profile/{{commentz.username}}">{{commentz.username}}</a>
+<br>
+    <a href="/post/{{commentz.id}}/comment/edit" style="color:black; text-decoration:none">Edit</a> |
+        <a href="/post/{{commentz.id}}/comment/delete" style="color:black; text-decoration:none">Delete</a>
+    </p>
+
+    <hr>
+    <div style="padding-left:60px;">
+  <p>{{commentz.comment}}</p>
+    </div>
+    </div>
+            </div>
+    </div>
+    <br>
+
+{% endfor %}
+</div>
+</div>
+{% else %}
+
+
+<div class="container">
+    <h2>COMMENTS</h2>
+    <p class="text-muted" style="padding:20px">
+        NO COMMENTS MADE YET :(
+    </p>
+</div>
+{% endif %}
+
+{% endblock content%}

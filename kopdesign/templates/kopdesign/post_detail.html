@@ -1,0 +1,30 @@
+{% extends 'kopdesign/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container" style="padding-top:55px;">
+    <img src="{{object.Image.url}}" width="auto" height="75%" style="pointer-events: none;">
+
+<br><br>
+    <p class="text-muted">
+        Posted on {{ object.datetime | date:"M d o" }} by @{{object.username}}
+    {% if user.is_authenticated %}
+    </p>
+    <p>
+      <a href="/post/{{object.id}}/update"> <button class="btn btn-sm btn-outline-info"> Update Post </button></a>
+      <a href="/post/{{object.id}}/delete/"> <button  class="btn btn-sm btn-outline-danger"> Delete Post </button></a>
+    </p>
+    {% else %}
+            <p><a href="{{object.Image.url}}" download="{{object.Image.url}}"><button class="btn btn-dark btn-sm"><i class="fa fa-download"></i> Download</button></a>
+
+    {% endif %}
+
+    <hr>
+    <p style="text-align: justify;">
+        {{ object.content }}
+    </p>
+
+
+
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock content %}

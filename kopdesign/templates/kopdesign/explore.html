@@ -1,0 +1,60 @@
+{% extends 'kopdesign/base.html' %}
+{% block content %}
+<style>
+    #pic:hover{
+    transform: scale(1.1);
+    }
+</style>
+{% if user.is_authenticated %}
+<div class="container" style="content-align:center; padding-top:20px; ">
+    <p class="lead" style="font-size:35px">
+    Explore KOP DESIGN
+    </p>
+    <p class="text-muted">Explore all the most liked posts in kop design</p>
+    <hr>
+
+    <div class="container" style="padding-left:80px">
+    {% if post %}
+    <div class="row">
+    {% for posts in post %}
+    <a href='/post/{{posts.id}}/'>
+    <div class="column mr-5 mb-5 mt-4 animated zoomIn">
+    <div class="card" style="width:29rem;">
+         <img class="card-img-top" id="pic" src="{{posts.Image.url}}" alt="Card image cap">
+    </div>
+    </div>
+    </a>
+{% endfor %}
+{%endif%}
+</div>
+</div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+{% else %}
+<div class="container" style="content-align:center; padding-top:20px; ">
+    <p class="lead" style="font-size:35px">
+    Explore KOP DESIGN
+    </p>
+    <hr>
+    <p class="text-muted">Explore the post and enjoy the pictures. Want your post to be shown here? <a href="/signup" style="text-decoration:none">Signup now</a> </p>
+
+
+    <div class="container" style="padding-left:80px">
+    {% if post %}
+    <div class="row">
+    {% for posts in post %}
+    <a href='/post/{{posts.id}}/'>
+    <div class="column mr-5 mb-5 mt-4 animated zoomIn">
+    <div class="card" style="width:29rem;">
+         <img class="card-img-top" id="pic" src="{{posts.Image.url}}" alt="Card image cap">
+    </div>
+    </div>
+    </a>
+{% endfor %}
+{%endif%}
+</div>
+</div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+{% endif %}
+{% endblock content %}

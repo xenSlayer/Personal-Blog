@@ -1,0 +1,23 @@
+{% extends 'kopdesign/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container mt-5 " style="background-color: rgb(26, 26, 26); color: blanchedalmond; padding-right: 80px; padding-left: 80px; padding-top: 80px; padding-bottom: 80px ">
+  <h1>SIGN UP NOW </h1>
+  <p class="text-muted" style="font-size: 12px">
+    Sign up now to get all the cool features. Now you can post your own images and make money.
+  </p>
+  <hr>
+<form method="POST" class="animated fadeIn">
+  <div class="container" style="padding-left:20px; padding-right:40px ">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-danger btn-lg" type="submit"> SIGNUP</button>
+  </div>
+</form>
+  <br><br>
+    <p class="text-muted">
+      Already have an account? <a href="/login" style="color: white">Login</a>
+    </p>
+</div>
+{% endblock content %}

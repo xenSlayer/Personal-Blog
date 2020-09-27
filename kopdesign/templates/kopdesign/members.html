@@ -1,0 +1,53 @@
+{% extends 'kopdesign/base.html' %}
+{% block content %}
+<style>
+.active-pink input[type=text] {
+border-bottom: 1px solid #f48fb1;
+box-shadow: 0 1px 0 0 #f48fb1;
+}
+#card:hover{
+    transform: scale(1.1);
+}
+</style>
+<div class="container mt-4">
+<p class="lead" style="font-size:35px;">Find Users to Follow</p>
+
+    <hr>
+    <p class="text-muted">Follow people to see their post in your homepage</p>
+
+<div class="row">
+{% for user in users %}
+        <div class="col-6 mb-4">
+            <div class="card animated bounceInLeft">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-lg-4 col-md-6 text-center">
+                            <img src="{{ user.oser.image.url }}" alt="" class="mx-auto rounded-circle img-fluid">
+                        </div>
+                        <div class="col-12 col-lg-8 col-md-6">
+                            <h3 class="mb-0 text-truncated">{{user.first_name}} {{user.last_name}}</h3>
+                            <p class="lead">@{{user.username}}  <br> {{user.email}} </p>
+
+                        </div>
+                        <div class="col-12 col-lg-4 mt-2 ml-3">
+                                {% if not user in friends %}
+            <button onclick="location.href='/follow/add/{{user.id}}/';" class="btn btn-block btn-info"><span class="fa fa-plus-circle"></span> Follow</button>
+            {% else %}
+            <button onclick="location.href='/follow/remove/{{user.id}}/';" class="btn btn-block btn-danger"><span class="fa fa-minus-circle"></span> Unfollow</button>
+            {% endif %}
+                        </div>
+                        <div class="col-12 col-lg-4 mt-2">
+                            <button onclick="location.href='/accounts/profile/{{user.username}}/';" class="btn btn-outline-info btn-block"><span class="fa fa-user"></span> View Profile</button>
+                        </div>
+
+                        <!--/col-->
+                    </div>
+                    <!--/row-->
+                </div>
+                <!--/card-block-->
+            </div>
+        </div>
+{% endfor %}
+</div>
+    </div>
+{% endblock %}

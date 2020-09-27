@@ -1,0 +1,88 @@
+{% extends 'kopdesign/base.html' %}
+{% block content %}
+<style>
+.active-pink input[type=text] {
+border-bottom: 1px solid #f48fb1;
+box-shadow: 0 1px 0 0 #f48fb1;
+}
+#card:hover{
+    transform: scale(1.1);
+}
+</style>
+<div class="container" style="padding-top: 50px;">
+
+<form class="form-inline md-form form-sm active-pink active-pink-2 mt-2 mb-5" method="POST">
+  {% csrf_token %}
+    <i class="fas fa-search" aria-hidden="true"></i>
+  <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search Post or User" name="search"
+    aria-label="Search">
+</form>
+
+    {% if found %}
+    <p class="text-muted">
+        {{text}}
+    </p>
+    {% else %}
+    <p class="text-muted">
+        {{text}}
+    </p>
+    {% endif %}
+
+</div>
+{% if user_profile %}
+<div class="container">
+    <p class="text-muted">ACCOUNTS</p>
+{% for profile in user_profile %}
+<div class="card animated bounceInLeft" style="padding:10px;">
+
+<div class="media-body  mt-3">
+    <div class="media">
+        <img src="{{ profile.oser.image.url }}" class="align-self-start mr-3 mt-5 ml-4 rounded-circle account-img" alt="{{profile_img.user}}'s Profile Photo" width="11%" height="13%" style="pointer-events: none; float:left;">
+
+        <div class="container" style="padding:30px;">
+    <p style="font-size:20px">@{{profile.username}}</p>
+    <p>
+        {{profile.email}}
+    </p>
+    <p>
+        {{profile.first_name}} {{profile.last_name}}
+
+    </p>
+        <p>
+            <a href="/accounts/profile/{{profile.username}}/"><button class="btn btn-sm btn-info">Visit Profile</button></a>
+        </p>
+        </div>
+    </div>
+
+        </div>
+    </div>
+    <br>
+{% endfor %}
+</div>
+{% endif %}
+
+{% if post %}
+
+<div class="container">
+
+    <hr>
+    <p class="text-muted">POSTS</p>
+    <div class="row" style="padding: 40px; padding-left:110px">
+{% for posts in post %}
+    <a href='/post/{{posts.id}}/'>
+    <div class="column mr-4 mt-4 mb-4 ml-0 animated zoomIn">
+    <div class="card" style="width:27rem;" id="card">
+         <img class="card-img-top" src="{{posts.Image.url}}" alt="Card image cap">
+    </div>
+    </div>
+    </a>
+    {% endfor %}
+    </div>
+</div>
+</div>
+{% endif %}
+
+
+<br><br>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+{% endblock content %}

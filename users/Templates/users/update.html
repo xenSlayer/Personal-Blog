@@ -1,0 +1,18 @@
+{% extends 'kopdesign/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+
+<div class="container" style="padding: 50px">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ u_form | crispy }}
+    {{ p_form | crispy }}
+<button class="btn btn-danger btn-sm" type="submit">Update</button>
+    <a href="/accounts/delete/{{user.username}}/"><button class="btn btn-warning btn-sm" type="button">Delete Account</button></a>
+</form>
+
+</div>
+<br><br>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+{% endblock content %}

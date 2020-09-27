@@ -1,0 +1,17 @@
+{% extends 'kopdesign/base.html' %}
+{% block content %}
+<div class="container" style="padding:50px">
+    <form method="POST">
+        {% csrf_token %}
+        <h4>Are you sure you want to delete the comment?</h4>
+        <p class="ml-5">
+            {{object.comment}}
+        </p>
+        <hr>
+        <div style="margin-top:10px">
+       <a href="{% url 'comment-delete' object.id %}"><button class="btn btn-sm btn-outline-danger" type="submit">Confirm</button></a>
+
+        </div>
+    </form>
+</div>
+{% endblock content %}

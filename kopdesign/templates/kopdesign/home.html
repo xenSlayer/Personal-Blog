@@ -1,0 +1,40 @@
+{% extends 'kopdesign/base.html' %}
+{% block content %}
+<style>
+    #pic:hover{
+    transform: scale(1.1);
+    }
+</style>
+
+<div class="container" style="content-align:center; padding-top:20px; ">
+    <h1>
+    Home Post
+    </h1>
+
+    <hr>
+<p class="text-muted">Post of users you follow</p>
+    <div class="container" style="padding-left:80px">
+    {% if post %}
+    <div class="row">
+    {% for posts in post %}
+    <a href='/post/{{posts.id}}/'>
+    <div class="column mr-5 mb-5 mt-4 animated zoomIn">
+    <div class="card" style="width:29rem;">
+         <img class="card-img-top" id="pic" src="{{posts.Image.url}}" alt="Card image cap">
+    </div>
+    </div>
+    </a>
+    {% endfor %}
+
+</div>
+
+<br><br><br><br><br><br>
+{% else %}
+<p>Follow more people so you can see their post.</p>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endif %}
+        </div>
+    </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+{% endblock content %}

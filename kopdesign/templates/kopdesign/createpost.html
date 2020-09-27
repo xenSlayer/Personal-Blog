@@ -1,0 +1,18 @@
+{% extends 'kopdesign/base.html' %}
+{%load static%}
+{% load crispy_forms_tags %}
+{% block content %}
+<div style="padding-top:45px;">
+<div class="container" style="padding:80px;background-image: url('https://images.pexels.com/photos/1624275/pexels-photo-1624275.jpeg')">
+<form method="POST" enctype="multipart/form-data">
+    <h1 style="color:blanchedalmond;">Share a post so others can see it !</h1>
+    <div class="container">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <button type="submit" class="btn btn-light btn-sm">Post</button>
+    </div>
+
+</form>
+</div>
+{% endblock content %}
+</div>
